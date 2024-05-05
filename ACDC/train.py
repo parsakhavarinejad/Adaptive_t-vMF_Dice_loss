@@ -157,8 +157,8 @@ if __name__ == '__main__':
 
     train, test= train_test_split(dataset, test_size=0.25)
     # data loader #
-    data_train = CustomImageMaskDataset(train, train_transforms)
-    data_val = CustomImageMaskDataset(test, train_transforms)
+    data_train = CustomImageMaskDataset(train)
+    data_val = CustomImageMaskDataset(test)
     train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
     val_loader = torch.utils.data.DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
 
