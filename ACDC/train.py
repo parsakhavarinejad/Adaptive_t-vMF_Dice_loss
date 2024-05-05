@@ -14,7 +14,7 @@ import random
 import sys
 
 import utils as ut
-from mydataset import CVCClinicDB_Dataset
+from mydataset import CustomImageMaskDataset
 from unet import U_Net
 from networks.vit_seg_modeling import VisionTransformer as ViT_seg
 from networks.vit_seg_modeling import CONFIGS as CONFIGS_ViT_seg
@@ -147,11 +147,19 @@ if __name__ == '__main__':
                                    ut.ExtToTensor(),
                                    ])
 
+    masks = glob.glob("/kaggle/input/breast-ultrasound-images-dataset/Dataset_BUSI_with_GT/*/*_mask.png")
+    images = [mask_images.replace("_mask", "") for mask_images in masks]
+    labels = []
+    from sklearn.model_selection import train_test_split
+    series = list(zip(images, masks))
+    dataset = pd.DataFrame(series, columns=['image_path', 'mask_path'])
+
+    train, test= train_test_split(dataset, test_size=0.25)
     # data loader #
-    data_train = CVCClinicDB_Dataset(dataset_type='train', transform=train_transform) 
-    data_val = CVCClinicDB_Dataset(dataset_type='val', transform=val_transform)
-    train_loader = torch.utils.data.DataLoader(data_train, batch_size=args.batchsize, shuffle=True, drop_last=True, num_workers=2)
-    val_loader = torch.utils.data.DataLoader(data_val, batch_size=args.batchsize, shuffle=False, drop_last=True, num_workers=2)
+    data_train = CustomImageMaskDataset(train, train_transforms)
+    data_val = CustomImageMaskDataset(test, train_transforms)
+    train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
+    val_loader = torch.utils.data.DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
 
 
     # model #
