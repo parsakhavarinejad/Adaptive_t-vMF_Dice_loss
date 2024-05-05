@@ -81,6 +81,7 @@ class Adaptive_tvMF_DiceLoss(nn.Module):
         if softmax:
             inputs = torch.softmax(inputs, dim=1)
         target = self._one_hot_encoder(target)
+        target = target.squeeze(2)
         assert inputs.size() == target.size(), 'predict {} & target {} shape do not match'.format(inputs.size(), target.size())
         loss = 0.0
 
