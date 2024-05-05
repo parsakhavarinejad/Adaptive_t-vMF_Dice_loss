@@ -159,8 +159,8 @@ if __name__ == '__main__':
     # data loader #
     data_train = CustomImageMaskDataset(train)
     data_val = CustomImageMaskDataset(test)
-    train_loader = torch.utils.data.DataLoader(data_train, batch_size=batch_size, shuffle=True)
-    val_loader = torch.utils.data.DataLoader(data_val, batch_size=batch_size, shuffle=False)
+    train_loader = torch.utils.data.DataLoader(data_train, batch_size=args.batchsize, shuffle=True)
+    val_loader = torch.utils.data.DataLoader(data_val, batch_size=args.batchsize, shuffle=False)
 
 
     # model #
