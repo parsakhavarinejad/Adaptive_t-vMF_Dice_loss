@@ -155,10 +155,10 @@ if __name__ == '__main__':
     series = list(zip(images, masks))
     dataset = pd.DataFrame(series, columns=['image_path', 'mask_path'])
 
-    train, test= train_test_split(dataset, test_size=0.25)
+    train_, test_= train_test_split(dataset, test_size=0.25)
     # data loader #
-    data_train = CustomImageMaskDataset(train)
-    data_val = CustomImageMaskDataset(test)
+    data_train = CustomImageMaskDataset(train_)
+    data_val = CustomImageMaskDataset(test_)
     train_loader = torch.utils.data.DataLoader(data_train, batch_size=args.batchsize, shuffle=True)
     val_loader = torch.utils.data.DataLoader(data_val, batch_size=args.batchsize, shuffle=False)
 
