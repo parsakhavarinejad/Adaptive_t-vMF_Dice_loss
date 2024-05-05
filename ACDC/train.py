@@ -164,10 +164,10 @@ if __name__ == '__main__':
 
 
     # model #
-    if args.model=='unet':
+    if args.models=='unet':
         model = U_Net(output=args.classes).cuda(device)
 
-    elif args.model=='trans_unet':
+    elif args.models=='trans_unet':
         config_vit = CONFIGS_ViT_seg["R50-ViT-B_16"]
         config_vit.n_classes = args.classes
         config_vit.n_skip = 3
@@ -176,7 +176,7 @@ if __name__ == '__main__':
         model = ViT_seg(config_vit, img_size=224, num_classes=config_vit.n_classes).cuda(device)
         model.load_from(weights=np.load(config_vit.pretrained_path))
 
-    elif args.model=='fcb':
+    elif args.models=='fcb':
         model = models.FCBFormer(output=args.classes).cuda(device)
 
 
