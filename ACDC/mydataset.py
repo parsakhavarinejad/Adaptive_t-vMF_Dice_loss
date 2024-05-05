@@ -4,6 +4,7 @@ import torch.utils.data as data
 from torchvision import datasets, transforms
 import os
 from PIL import Image, ImageOps
+import random
 
 class CustomImageMaskDataset(data.Dataset):
     def __init__(self, dataframe, image_transform=None):
