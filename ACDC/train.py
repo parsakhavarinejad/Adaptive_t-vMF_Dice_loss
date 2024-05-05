@@ -16,8 +16,8 @@ import sys
 import utils as ut
 from mydataset import CustomImageMaskDataset
 from unet import U_Net
-from networks.vit_seg_modeling import VisionTransformer as ViT_seg
-from networks.vit_seg_modeling import CONFIGS as CONFIGS_ViT_seg
+from TransUnet.vit_seg_modeling import VisionTransformer as ViT_seg
+from TransUnet.vit_seg_modeling import CONFIGS as CONFIGS_ViT_seg
 from FCBFormer import models
 from loss import Adaptive_tvMF_DiceLoss
 from dsc import DiceScoreCoefficient
