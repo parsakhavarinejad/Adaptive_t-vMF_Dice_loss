@@ -19,7 +19,7 @@ class CustomImageMaskDataset(data.Dataset):
         mask_path = self.data.iloc[idx]['mask_path']
 
         image = Image.open(image_path).convert('RGB') 
-        mask = Image.open(mask_path).convert('RGB')
+        mask = Image.open(mask_path).convert('L')
         
         seed = np.random.randint(2147483647)
         random.seed(seed) 
